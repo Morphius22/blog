@@ -7,9 +7,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
-var indexRouter = require("./routes/index");
+var blogRouter = require("./routes/blog");
 var usersRouter = require("./routes/users");
 
 var app = express();
@@ -34,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/", blogRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler

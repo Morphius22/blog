@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  author: { type: String, required: true },
   message: { type: String, required: true },
   date: { type: Date, required: true, default: Date.now },
-  post: { type: Schema.Types.ObjectId, ref: "Posts" },
+  blog: { type: Schema.Types.ObjectId, ref: "Blogs" },
 });
 
 commentSchema.virtual("url").get(function () {
