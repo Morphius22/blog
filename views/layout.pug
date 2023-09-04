@@ -2,6 +2,20 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/output.css')
   body
+    .navbar.bg-base-100
+      .flex-1
+        a(href="/").btn.btn-ghost.normal-case.text-xl Morphius Blog
+      .flex-none
+        ul.menu.menu-horizontal.px-1
+          if user
+            li
+              a(href="/createPost") Create Post
+            li 
+              a(href="/logout") Logout
+
+          if !user
+            li
+              a(href='/users/login') Login
     block content
