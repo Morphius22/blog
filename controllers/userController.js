@@ -22,6 +22,63 @@ exports.login_get = async (req, res) => {
   res.render("login");
 };
 
+exports.validate_login = [
+  body("email")
+    .trim()
+    .isEmail()
+    .escape()
+    .withMessage("Invalid Email or Password"),
+  body("password")
+    .trim()
+    .escape()
+    .isLength({ min: 3 })
+    .withMessage("Invalid Email or Password"),
+];
+
+exports.login_post = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty) {
+    console.log("did not pass validation");
+    res.render("login", { errors: errors.errors });
+    return;
+  }
+
+  //see if anyone exists in DB with that username
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    console.log("email is not valid");
+    res.redirect("signup", { errors: "incorrect login or password" });
+    return;
+  }
+
+  console.log("username is valid");
+
+  const isPasswordValid = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
+
+  //if they do, see if password is correct
+  if (!isPasswordValid) {
+    console.log("password is not valid");
+    res.redirect("signup", { errors: "incorrect login or password" });
+    return;
+  }
+
+  console.log("password is valid");
+
+  //if it is, send JWT
+  const token = generateToken(user);
+
+  res.cookie("jwt", token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+
+  console.log("cookie is sent");
+
+  res.redirect("/");
+};
+
 exports.signup_get = async (req, res) => {
   res.render("signup");
 };

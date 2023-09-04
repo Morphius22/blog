@@ -13,4 +13,6 @@ router.post(
   userController.signup_post
 );
 
+router.post("/login", userController.validate_login, userController.login_post);
+
 module.exports = router;
