@@ -7,7 +7,7 @@ const blogSchema = new Schema({
   body: { type: String, required: true },
   datePosted: { type: Date, required: true, default: Date.now },
   comments: { type: Schema.Types.ObjectId, ref: "Comments" },
-  status: { type: String, required: true, enum: ["Published", "Draft"] },
+  status: { type: String, required: true, enum: ["publish", "draft"] },
 });
 
 blogSchema.virtual("url").get(function () {

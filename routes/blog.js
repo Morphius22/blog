@@ -3,8 +3,10 @@ var router = express.Router();
 const blogController = require("../controllers/blogController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+router.get("/", blogController.get_index);
+
+router.get("/blog/create", blogController.get_create_blog);
+
+router.post("/blog/create", blogController.post_create_blog);
 
 module.exports = router;
