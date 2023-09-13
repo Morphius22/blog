@@ -6,7 +6,9 @@ const moment = require("moment");
 const Blog = require("../models/blogs");
 
 exports.get_index = async (req, res) => {
-  res.render("index");
+  const blogs = await Blog.find().sort({ datePosted: 1 }).populate("author");
+
+  res.render("index", { blogs: blogs });
 };
 
 exports.get_create_blog = async (req, res) => {
@@ -40,14 +42,24 @@ exports.post_create_blog = async (req, res) => {
     return;
   }
 
+  console.log("this is the user id", res.locals.user.id);
+
   const new_blog = new Blog({
     title: req.body.title,
     body: req.body.content,
     status: req.body.status,
-    author: res.locals.user.username,
+    author: res.locals.user.id,
   });
 
   await new_blog.save();
 
-  res.render("index");
+  res.redirect("/");
+};
+
+exports.get_blog_detail = async (req, res) => {
+  const blogId = req.params.id;
+
+  const blogDetail = await Blog.findOne({ _id: blogId }).populate("author");
+
+  res.render("blog-detail", { blogDetail });
 };
