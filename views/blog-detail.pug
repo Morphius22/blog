@@ -1,14 +1,20 @@
 extends layout
 
 block content 
-    h1= blogDetail.title 
-    p= blogDetail.body
-    p= blogDetail.author.username
+    .flex.justify-center.items-center
+        .card.bg-neutral.shadow-xl.my-6(class='w-1/2')
+            .card-body.flex.flex-col.items-start
+                h1= blogDetail.title 
+                p= blogDetail.body
+                p= blogDetail.author.username
 
     if blogDetail.comments
         each comment in blogDetail.comments
-            p= comment.message
-            p= comment.date
+            .flex.justify-center.items-center
+                .card.bg-neutral.shadow-xl.my-6(class='w-1/2')
+                     .card-body.flex.flex-col.items-start
+                        p= comment.message
+                        p= comment.date
 
     h1 Leave a comment 
     form.flex.justify-center(method='POST' action='/blog/' + blogDetail._id + '/comment')

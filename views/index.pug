@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  h1 Welcome to the Blog!
   .flex.flex-col.justify-center
     each blog in blogs 
       if blog.status == 'publish'
-        .card.w-max.bg-neutral.shadow-xl.my-6
-          .card-body.flex.flex-col.items-start
-            h1.card-title.my-2= blog.title 
-            p.my-2=blog.body
-            a(href="/blog/" + blog._id)
-              button.btn.btn-primary.w-32.my-2 Read More
+        .flex.justify-center.items-center
+          .card.bg-neutral.shadow-xl.my-6.justify-center(class='w-1/2')
+            .card-body.flex.flex-col.items-start
+              h1.card-title.my-2= blog.title 
+              p.my-2=blog.body
+              a(href="/blog/" + blog._id)
+                button.btn.btn-primary.w-32.my-2 Read More
     

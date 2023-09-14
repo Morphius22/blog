@@ -1702,12 +1702,20 @@ html {
   height: 1.5rem;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-32 {
   width: 8rem;
 }
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-fit {
@@ -1717,11 +1725,6 @@ html {
 
 .w-full {
   width: 100%;
-}
-
-.w-max {
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .max-w-xs {
@@ -1746,6 +1749,10 @@ html {
 
 .items-start {
   align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
 }
 
 .justify-center {
