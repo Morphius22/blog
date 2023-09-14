@@ -4,3 +4,16 @@ block content
     h1= blogDetail.title 
     p= blogDetail.body
     p= blogDetail.author.username
+
+    if blogDetail.comments
+        each comment in blogDetail.comments
+            p= comment.message
+            p= comment.date
+
+    h1 Leave a comment 
+    form.flex.justify-center(method='POST' action='/blog/' + blogDetail._id + '/comment')
+        .form-control.w-full.max-w-xs.flex.flex-col.justify-center
+            label.label.mt-6
+                span.label-text Comment
+            textarea.textarea.textarea-bordered(placeholder='type comment here' name='comment' required)
+            button(type='submit').btn.btn-primary.mt-6 Post Comment

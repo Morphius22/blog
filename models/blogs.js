@@ -6,7 +6,7 @@ const blogSchema = new Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   datePosted: { type: Date, required: true, default: Date.now },
-  comments: { type: Schema.Types.ObjectId, ref: "Comments" },
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comments" }],
   status: { type: String, required: true, enum: ["publish", "draft"] },
 });
 

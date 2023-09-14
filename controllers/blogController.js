@@ -1,9 +1,9 @@
 const express = require("express");
 require("express-async-errors");
 const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
 const moment = require("moment");
 const Blog = require("../models/blogs");
+const Comment = require("../models/comments");
 
 exports.get_index = async (req, res) => {
   const blogs = await Blog.find().sort({ datePosted: 1 }).populate("author");
@@ -44,6 +44,10 @@ exports.post_create_blog = async (req, res) => {
 
   console.log("this is the user id", res.locals.user.id);
 
+  const new_comment = new Comment({});
+
+  await Comment.save(new_comment);
+
   const new_blog = new Blog({
     title: req.body.title,
     body: req.body.content,
@@ -59,7 +63,26 @@ exports.post_create_blog = async (req, res) => {
 exports.get_blog_detail = async (req, res) => {
   const blogId = req.params.id;
 
-  const blogDetail = await Blog.findOne({ _id: blogId }).populate("author");
+  const blogDetail = await Blog.findOne({ _id: blogId })
+    .populate("author")
+    .populate("comments");
+
+  console.log(blogDetail);
 
   res.render("blog-detail", { blogDetail });
+};
+
+exports.post_blog_comment = async (req, res) => {
+  const newComment = new Comment({
+    message: req.body.comment,
+    blog: req.params.id,
+  });
+
+  const savedComment = await newComment.save();
+
+  await Blog.findByIdAndUpdate(req.params.id, {
+    $push: { comments: savedComment._id },
+  });
+
+  res.redirect("/blog/" + req.params.id);
 };
