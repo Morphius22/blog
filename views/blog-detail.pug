@@ -8,14 +8,14 @@ block content
                 p= blogDetail.body
                 p= blogDetail.author.username
 
-    h1.w-6.text-center Comments
     if blogDetail.comments
+        h1.text-center.text-lg.font-semibold Comments
         each comment in blogDetail.comments
             .flex.justify-center.items-center
-                .card.bg-neutral.shadow-xl.my-6(class='w-1/2')
-                     .card-body.flex.flex-col.items-start
-                        p= comment.message
-                        p= comment.date
+                flex.flex-col.items-start.my-6(class='w-1/2')
+                    .divider
+                    p= comment.message
+                    p= comment.date
 
     form.flex.justify-center(method='POST' action='/blog/' + blogDetail._id + '/comment')
         .form-control.flex.flex-col.justify-center(class='w-1/2')
