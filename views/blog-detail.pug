@@ -4,9 +4,9 @@ block content
     .flex.justify-center.items-center
         .card.bg-neutral.shadow-xl.my-6(class='w-1/2')
             .card-body.flex.flex-col.items-start
-                h1= blogDetail.title 
-                p= blogDetail.body
-                p= blogDetail.author.username
+                h1.text-2xl= blogDetail.title 
+                .my-6!= blogDetail.body
+                p.my-6= blogDetail.author.username
 
     if blogDetail.comments
         h1.text-center.text-lg.font-semibold Comments

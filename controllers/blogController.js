@@ -6,7 +6,9 @@ const Blog = require("../models/blogs");
 const Comment = require("../models/comments");
 
 exports.get_index = async (req, res) => {
-  const blogs = await Blog.find().sort({ datePosted: 1 }).populate("author");
+  const blogs = await Blog.find({ status: "publish" })
+    .sort({ datePosted: 1 })
+    .populate("author");
 
   res.render("index", { blogs: blogs });
 };

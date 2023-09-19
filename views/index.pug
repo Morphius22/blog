@@ -3,7 +3,6 @@ extends layout
 block content
   .flex.flex-col.justify-center
     each blog in blogs 
-      if blog.status == 'publish'
         .flex.justify-center.items-center
           .card.bg-neutral.shadow-xl.my-6.justify-center(class='w-1/2')
             .card-body.flex.flex-col.items-start

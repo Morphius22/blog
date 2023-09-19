@@ -6,17 +6,6 @@ block content
       tinymce.init({
         selector: '#content',
       });
-    //- script.
-    //-     document.getElementById('submitBtn').addEventListener('click', function(event) {
-    //-         event.preventDefault();
-    //-         tinymce.triggerSave(); // Update the textarea with the TinyMCE content
-    //-         var content = document.getElementById('content').value;
-    //-         if (content.trim() === '') {
-    //-         alert('Content is required');
-    //-         return;
-    //-         }
-    //-         document.querySelector('form').submit(); // Submit the form
-    //-     });
 
     form.flex.justify-center(method='POST' action='/blog/create')
         .form-control.flex.flex-col.justify-center(class='w-1/2')
