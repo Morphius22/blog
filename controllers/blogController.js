@@ -16,16 +16,9 @@ exports.get_create_blog = async (req, res) => {
 };
 
 exports.validate_new_blog = [
-  body("title")
-    .trim()
-    .isEmail()
-    .escape()
-    .withMessage("Invalid Email or Password"),
-  body("content")
-    .trim()
-    .escape()
-    .isLength({ min: 3 })
-    .withMessage("Invalid Email or Password"),
+  body("title").trim().escape(),
+  body("snippet").trim().escape(),
+  body("content").escape().isLength({ min: 3 }),
   body("status")
     .exists()
     .withMessage("status field is required")
@@ -36,7 +29,7 @@ exports.validate_new_blog = [
 exports.post_create_blog = async (req, res) => {
   const errors = validationResult(req);
 
-  if (!errors.isEmpty) {
+  if (!errors.isEmpty()) {
     console.log("validation error on new blog form");
     res.render("create-post", errors);
     return;

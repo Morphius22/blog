@@ -6,7 +6,19 @@ block content
       tinymce.init({
         selector: '#content',
       });
-    form.flex.justify-center(method='POST' action='')
+    //- script.
+    //-     document.getElementById('submitBtn').addEventListener('click', function(event) {
+    //-         event.preventDefault();
+    //-         tinymce.triggerSave(); // Update the textarea with the TinyMCE content
+    //-         var content = document.getElementById('content').value;
+    //-         if (content.trim() === '') {
+    //-         alert('Content is required');
+    //-         return;
+    //-         }
+    //-         document.querySelector('form').submit(); // Submit the form
+    //-     });
+
+    form.flex.justify-center(method='POST' action='/blog/create')
         .form-control.flex.flex-col.justify-center(class='w-1/2')
             label.label.mt-6
                 span.label-text Title
@@ -16,14 +28,14 @@ block content
             input.input.input-bordered.w-full(type='text' placeholder='snippet' name='snippet' required)
             label.label.mt-6
                 span.label-text Content
-            textarea.textarea.textarea-bordered(class='h-1/2')(placeholder='content' name='content' id= "content" required)
+            textarea.textarea.textarea-bordered(class='h-1/2' placeholder='content' name='content' id= "content")
             label.label
                 span.label-text Publish or Save?
             select.select.select-bordered(name='status' required)
                 //- option(disabled='' selected='') Pick one
                 option(value="publish") Publish
                 option(value="draft") Draft
-            button(type='submit').btn.btn-primary.mt-6 Submit
+            button(type='submit' id='submitBtn').btn.btn-primary.mt-6 Submit
 
     if errors && errors.length > 0
         each error in errors 

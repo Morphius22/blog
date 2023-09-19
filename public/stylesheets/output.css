@@ -1731,6 +1731,10 @@ html {
   display: flex;
 }
 
+.h-1\/2 {
+  height: 50%;
+}
+
 .h-6 {
   height: 1.5rem;
 }
