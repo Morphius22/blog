@@ -46,10 +46,11 @@ exports.post_create_blog = async (req, res) => {
 
   const new_comment = new Comment({});
 
-  await Comment.save(new_comment);
+  await new_comment.save();
 
   const new_blog = new Blog({
     title: req.body.title,
+    snippet: req.body.snippet,
     body: req.body.content,
     status: req.body.status,
     author: res.locals.user.id,
@@ -85,4 +86,12 @@ exports.post_blog_comment = async (req, res) => {
   });
 
   res.redirect("/blog/" + req.params.id);
+};
+
+exports.get_blog_drafts = async (req, res) => {
+  const blogs = await Blog.find({ status: "draft" })
+    .populate("author")
+    .sort({ datePosted: 1 });
+
+  res.render("index", { blogs: blogs });
 };

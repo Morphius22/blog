@@ -8,7 +8,8 @@ block content
           .card.bg-neutral.shadow-xl.my-6.justify-center(class='w-1/2')
             .card-body.flex.flex-col.items-start
               h1.card-title.my-2= blog.title 
-              p.my-2=blog.body
+              if blog.snippet 
+                p.my-2=blog.snippet
               a(href="/blog/" + blog._id)
                 button.btn.btn-primary.w-32.my-2 Read More
     

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const blogSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "Users" },
   title: { type: String, required: true },
+  snippet: { type: String, required: true },
   body: { type: String, required: true },
   datePosted: { type: Date, required: true, default: Date.now },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comments" }],

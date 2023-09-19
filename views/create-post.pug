@@ -1,14 +1,22 @@
 extends layout 
 
 block content 
+    script(src="https://cdn.tiny.cloud/1/9chgg9ydxmly7zgjhf6i1dlczq0zpiox7dhujsmwi3v5mz47/tinymce/6/tinymce.min.js" referrerpolicy="origin")
+    script.
+      tinymce.init({
+        selector: '#content',
+      });
     form.flex.justify-center(method='POST' action='')
-        .form-control.w-full.max-w-xs.flex.flex-col.justify-center
+        .form-control.flex.flex-col.justify-center(class='w-1/2')
             label.label.mt-6
                 span.label-text Title
-            input.input.input-bordered.w-full.max-w-xs(type='text' placeholder='title' name='title' required)
+            input.input.input-bordered.w-full(type='text' placeholder='title' name='title' required)
+            label.label.mt-6
+                span.label-text Snippet
+            input.input.input-bordered.w-full(type='text' placeholder='snippet' name='snippet' required)
             label.label.mt-6
                 span.label-text Content
-            textarea.textarea.textarea-bordered(placeholder='content' name='content' required)
+            textarea.textarea.textarea-bordered(class='h-1/2')(placeholder='content' name='content' id= "content" required)
             label.label
                 span.label-text Publish or Save?
             select.select.select-bordered(name='status' required)
